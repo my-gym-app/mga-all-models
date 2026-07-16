@@ -1,10 +1,18 @@
 package com.mygym.app.models;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document(collection = "grievances")
 public class Grievance {
 
+	@Id
+	@MongoId(targetType = FieldType.OBJECT_ID)
+	private ObjectId _id;
+	
     private String grievanceId;
 
     private String branchId;
@@ -25,8 +33,9 @@ public class Grievance {
 
     public Grievance() {}
 
-    public Grievance(String grievanceId, String branchId, String memberId, String title, String date, String issueType, String description, String resolution, String closureDate) {
-        this.grievanceId = grievanceId;
+    public Grievance(ObjectId _id, String grievanceId, String branchId, String memberId, String title, String date, String issueType, String description, String resolution, String closureDate) {
+    	this._id = _id;
+    	this.grievanceId = grievanceId;
         this.branchId = branchId;
         this.memberId = memberId;
         this.title = title;
@@ -37,6 +46,9 @@ public class Grievance {
         this.closureDate = closureDate;
     }
 
+    public ObjectId get_id() { return _id; }
+	public void set_id(ObjectId _id) { this._id = _id;	}
+    
     public String getGrievanceId() { return grievanceId; }
     public void setGrievanceId(String grievanceId) { this.grievanceId = grievanceId; }
 
