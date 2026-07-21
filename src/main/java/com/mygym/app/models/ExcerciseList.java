@@ -2,32 +2,54 @@ package com.mygym.app.models;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Document(collection = "_exercise")
 public class ExcerciseList {
 
+	@Id
+	@MongoId(targetType = FieldType.OBJECT_ID)
+    private String internalOid;
+
+    @Field("id")
+    private String customId;
+
     @JsonProperty("Chest")
+    @Field("Chest")
     private List<String> chestExercises;
     
     @JsonProperty("Shoulder")
+    @Field("Shoulder")
     private List<String> shoulderExercises;
 
     @JsonProperty("Back")
+    @Field("Back")
     private List<String> backExercises;
     
     @JsonProperty("Biceps")
+    @Field("Biceps")
     private List<String> bicepsExercises;
     
     @JsonProperty("Triceps")
+    @Field("Triceps")
     private List<String> tricepsExercises;
     
     @JsonProperty("Legs")
+    @Field("Legs")
     private List<String> legsExercises;
     
     @JsonProperty("Abs")
+    @Field("Abs")
     private List<String> absExercises;
     
     @JsonProperty("Cardio")
+    @Field("Cardio")
     private List<String> cardioExercises;
 
 	public ExcerciseList(List<String> chestExercises, List<String> shoulderExercises, List<String> backExercises,
